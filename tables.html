@@ -9,7 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>健康小薄典</title>
+    <title>睡眠紀錄</title>
+    <style>
+    .custom-sidebar {
+    background: linear-gradient(135deg, #A3D1D1, #8EC0C0); /* 藍紫漸層範例 */   }
+    
+    </style>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +33,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav custom-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -337,44 +342,47 @@
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">睡眠紀錄表</h6>
                                 </div>
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">星期一 <span class="float-right">20%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- 睡眠輸入與紀錄 -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">睡眠紀錄輸入</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <form id="sleepForm">
+                                                <div class="form-group">
+                                                    <label for="sleep_day">選擇星期：</label>
+                                                    <select class="form-control" id="sleep_day">
+                                                        <option value="Monday">星期一</option>
+                                                        <option value="Tuesday">星期二</option>
+                                                        <option value="Wednesday">星期三</option>
+                                                        <option value="Thursday">星期四</option>
+                                                        <option value="Friday">星期五</option>
+                                                        <option value="Saturday">星期六</option>
+                                                        <option value="Sunday">星期日</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="sleep_hour">輸入睡眠時數（小時）：</label>
+                                                    <input type="number" class="form-control" id="sleep_hour" placeholder="例如：7" min="0" max="24">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">儲存</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <h4 class="small font-weight-bold">星期二 <span class="float-right">40%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">星期三 <span class="float-right">60%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0"
-                                            aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">星期四 <span class="float-right">80%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">星期五 <span class="float-right">Complete!</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">星期六 <span class="float-right">Complete!</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" style="width: 100%; background-color: #FF8040" role="progressbar" style="width: 100%" aria-valuenow="100"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">星期日 <span class="float-right">Complete!</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 100%; background-color: #C07AB8" role="progressbar" style="width: 100%" aria-valuenow="100"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                
+                                    <div class="card shadow mb-4 mt-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">睡眠進度表</h6>
+                                        </div>
+                                        <div class="card-body" id="sleepProgressContainer">
+                                            <!-- JavaScript 會動態插入進度條 -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div><div id="sleepTip" class="mt-3 text-gray-800 font-weight-bold"></div>
+  
+                            </div>
+                            <div id="sleepTip" class="mt-3 text-gray-800 font-weight-bold"></div>
                         </div>
                         </div>
                     
@@ -453,6 +461,57 @@
     }
   });
 </script>
+<script>
+    const maxSleepHour = 24;
+
+    function saveSleepData(day, hour) {
+        localStorage.setItem("sleep_" + day, hour);
+        renderSleepProgress();
+    }
+
+    function getSleepData(day) {
+        return parseInt(localStorage.getItem("sleep_" + day)) || 0;
+    }
+
+    function renderSleepProgress() {
+        const container = document.getElementById("sleepProgressContainer");
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const dayLabels = {
+            "Monday": "星期一", "Tuesday": "星期二", "Wednesday": "星期三",
+            "Thursday": "星期四", "Friday": "星期五", "Saturday": "星期六", "Sunday": "星期日"
+        };
+        container.innerHTML = "";
+        days.forEach(day => {
+            const hour = getSleepData(day);
+            const percent = Math.min(100, (hour / maxSleepHour) * 100);
+            const colorClass = percent >= 75 ? "bg-success" :
+                percent >= 50 ? "bg-info" :
+                    percent >= 25 ? "bg-warning" : "bg-danger";
+
+            container.innerHTML += `
+          <h4 class="small font-weight-bold">${dayLabels[day]} <span class="float-right">${hour} 小時 (${Math.round(percent)}%)</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar ${colorClass}" role="progressbar" style="width: ${percent}%;" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        `;
+        });
+    }
+
+    document.getElementById("sleepForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const day = document.getElementById("sleep_day").value;
+        const hour = parseInt(document.getElementById("sleep_hour").value);
+        if (hour >= 0 && hour <= 24) {
+            saveSleepData(day, hour);
+            document.getElementById("sleepForm").reset();
+        } else {
+            alert("請輸入 0 到 24 之間的數字");
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", renderSleepProgress);
+</script>
+  
 
 </body>
 

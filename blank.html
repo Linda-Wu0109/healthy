@@ -9,7 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>健康小薄典</title>
+    <title>步數紀錄</title>
+    <style>
+    .custom-sidebar {
+    background: linear-gradient(135deg, #A3D1D1, #8EC0C0); /* 藍紫漸層範例 */   }
+    </style>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,8 +33,7 @@
 
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+<ul class="navbar-nav custom-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -332,23 +335,40 @@
   
 </div>
 
-<!-- 步數登記 -->
-                        <div class="col-lg-6 mb-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">步數紀錄表</h6>
-                                </div>
-                                <div class="card-body">
-                                    <!-- 步數直條圖，限制高度 -->
-                                    <div>
-                                        <canvas id="stepBarChart" width="600" height="200"></canvas>
-                                    </div>
-                                            <div id="walkTip" class="mt-3 text-gray-800 font-weight-bold"></div>
+<!-- ✅ 步數圖表 HTML 區塊 -->
+<div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">步數紀錄表</h6>
+        </div>
+        <!-- ✅ 步數圖表與輸入區 -->
+        <div class="card-body">
+            <div>
+                <canvas id="stepBarChart" width="600" height="200"></canvas>
+            </div>
+            <div class="mt-4 px-3 pb-3">
+                <label class="font-weight-bold text-gray-800">輸入步數紀錄：</label>
+                <div class="form-inline">
+                    <select id="stepDaySelect" class="form-control mr-2">
+                        <option value="Mon">星期一</option>
+                        <option value="Tue">星期二</option>
+                        <option value="Wed">星期三</option>
+                        <option value="Thu">星期四</option>
+                        <option value="Fri">星期五</option>
+                        <option value="Sat">星期六</option>
+                        <option value="Sun">星期日</option>
+                    </select>
+                    <input type="number" id="stepInput" class="form-control mr-2" placeholder="輸入步數">
+                    <button id="saveStepBtn" class="btn btn-primary mr-2">儲存</button>
+                    <button id="clearStepBtn" class="btn btn-danger">清除</button>
+                </div>
+            </div>
+            <div id="walkTip" class="mt-3 text-gray-800 font-weight-bold"></div>
+        </div>
+  
+    </div>
+</div>
 
-                                </div>
-                                
-                            </div>
-                        </div>
                     </div>
 
 

@@ -9,7 +9,35 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>健康小薄典</title>
+    <title>喝水紀錄</title>
+
+    <style>
+    .custom-sidebar {
+    background: linear-gradient(135deg, #A3D1D1, #8EC0C0); /* 藍紫漸層範例 */   }
+    
+    </style>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    
+        #content-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        #content {
+            flex: 1;
+        }
+    </style>
+      
+    
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    </head>
+    
+    
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +56,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav custom-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -326,10 +354,25 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">喝水紀錄</h1>
-  
-</div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">喝水紀錄</h1>
+                    
+                </div>
+
+                <h5 class="text-gray-800 mt-4">💧 手動輸入每日喝水量 (cc)</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="number" id="water_Monday" placeholder="Monday" class="form-control mb-2">
+                        <input type="number" id="water_Tuesday" placeholder="Tuesday" class="form-control mb-2">
+                        <input type="number" id="water_Wednesday" placeholder="Wednesday" class="form-control mb-2">
+                        <input type="number" id="water_Thursday" placeholder="Thursday" class="form-control mb-2">
+                        <input type="number" id="water_Friday" placeholder="Friday" class="form-control mb-2">
+                        <input type="number" id="water_Saturday" placeholder="Saturday" class="form-control mb-2">
+                        <input type="number" id="water_Sunday" placeholder="Sunday" class="form-control mb-2">
+                        <button class="btn btn-primary btn-block" onclick="saveWater()">💾 儲存喝水量</button>
+                    </div>
+                </div>
+
 
  <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
@@ -439,6 +482,17 @@
     }
   });
 </script>
+<script>
+    function saveWater() {
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        days.forEach(day => {
+            const val = document.getElementById("water_" + day).value;
+            localStorage.setItem("water_" + day, val);
+        });
+        alert("✅ 喝水量已儲存，請重新整理頁面查看圖表！");
+    }
+</script>
+  
 
 </body>
 

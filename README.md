@@ -12,10 +12,14 @@
 - 每日睡眠時數（0~24 小時）
 
 ## 📷 專案畫面截圖
+![我的健康一覽表](https://github.com/user-attachments/assets/ae389035-c20f-410f-83c3-ce68d98b2c88)
+![基本資料](https://github.com/user-attachments/assets/ec1cb143-aa42-4426-b5bf-3ccbe80ca2aa)
+![我的目標-每週目標](https://github.com/user-attachments/assets/ba2d31fb-3c30-45f3-bc2e-2107ece2589a)
+![我的目標-每日紀錄](https://github.com/user-attachments/assets/e2dfb2de-1a6d-42e9-8512-5b2f7357de07)
+![步數圖表](https://github.com/user-attachments/assets/e6d22d65-19d8-4c8a-954d-8f8d0f12920a)
+![喝水記錄](https://github.com/user-attachments/assets/9408095c-826c-4a35-9154-84c928944a01)
+![睡眠紀錄](https://github.com/user-attachments/assets/85ae232f-e15d-4aae-bb08-89eadffe6df8)
 
-![步數圖表](./screenshots/step-chart.png)
-![喝水記錄](./screenshots/water-chart.png)
-![睡眠紀錄](./screenshots/sleep-progress.png)
 
 ## 🖥️ 使用技術
 

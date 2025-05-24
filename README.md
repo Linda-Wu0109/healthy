@@ -19,6 +19,7 @@
 ![步數圖表](https://github.com/user-attachments/assets/e6d22d65-19d8-4c8a-954d-8f8d0f12920a)
 ![喝水記錄](https://github.com/user-attachments/assets/9408095c-826c-4a35-9154-84c928944a01)
 ![睡眠紀錄](https://github.com/user-attachments/assets/85ae232f-e15d-4aae-bb08-89eadffe6df8)
+![聊天機器人](https://github.com/user-attachments/assets/fc02e832-ab80-4ce9-8bc0-04cc8ac90d41)
 
 
 ## 🖥️ 使用技術
